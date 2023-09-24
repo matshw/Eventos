@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">appEventos</string>
+    <string-array name="categorias">
+        <item>Trabalho</item>
+        <item>Estudo</item>
+        <item>Festa</item>
+        <item>Formatura</item>
+    </string-array>
+</resources>
