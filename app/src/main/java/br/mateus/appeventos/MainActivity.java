@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
                 String nomeEvento = nome.getText().toString().trim();
                 String dataEvento = calendario.getDayOfMonth() + "/" + (calendario.getMonth() + 1) + "/" + calendario.getYear();
                 String tipoEvento = spinner.getSelectedItem().toString().trim();
-                if (nomeEvento.isEmpty() || dataEvento.isEmpty() || tipoEvento.isEmpty()) {
+                if (nomeEvento.isEmpty() || dataEvento.isEmpty() || tipoEvento.equals("Selecione uma categoria")) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
                     builder.setTitle("Campos em branco")
                             .setMessage("Por favor, preencha todos os campos!")
@@ -85,6 +85,7 @@ public class MainActivity extends AppCompatActivity {
                         dao.editar(e);
                     }
                     atualizarItens();
+                    limparCampos();
                 }
             }
         });
@@ -109,5 +110,11 @@ public class MainActivity extends AppCompatActivity {
         listaEventos.clear();
         listaEventos.addAll(dao.listar());
         arrayEvento.notifyDataSetChanged();
+    }
+
+    private void limparCampos(){
+        nome.setText(" ");
+        calendario.updateDate(2023,0,1);
+        spinner.setSelection(0);
     }
 }

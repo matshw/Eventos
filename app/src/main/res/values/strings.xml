@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">appEventos</string>
     <string-array name="categorias">
+        <item>Selecione uma categoria</item>
         <item>Trabalho</item>
         <item>Estudo</item>
         <item>Festa</item>
