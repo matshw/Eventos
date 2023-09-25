@@ -2,18 +2,15 @@ package br.mateus.appeventos.Model;
 
 public class Evento {
     private int id; // ID único do evento
-    private String name;
-    private String date;
-    private String type;
+    private String nome;
+    private String data;
+    private String tipo;
 
-    public Evento(String name, String date, String type) {
-        this.name = name;
-        this.date = date;
-        this.type = type;
+    public Evento(String nome, String data, String tipo) {
+        this.nome = nome;
+        this.data = data;
+        this.tipo = tipo;
     }
-
-    // getters e setters
-    // ...
 
     public int getId() {
         return id;
@@ -23,27 +20,27 @@ public class Evento {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getNome() {
+        return nome;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
-    public String getDate() {
-        return date;
+    public String getData() {
+        return data;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public void setData(String data) {
+        this.data = data;
     }
 
-    public String getType() {
-        return type;
+    public String getTipo() {
+        return tipo;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
     }
 }

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -9,34 +8,61 @@
     android:padding="16dp"
     tools:context=".MainActivity">
 
+    <ImageButton
+        android:id="@+id/idSalvar"
+        android:layout_width="60dp"
+        android:layout_height="54dp"
+        android:contentDescription="salvar"
+        android:layout_marginLeft="325dp"
+        android:backgroundTint="#00FFFFFF"
+        android:baselineAligned="false"
+        android:src="@drawable/adicionar" />
+
     <EditText
-        android:id="@+id/eventNameEditText"
+        android:id="@+id/idNome"
         android:layout_width="match_parent"
         android:layout_height="71dp"
         android:hint="Nome do Evento" />
 
-    <DatePicker
-        android:id="@+id/eventDatePicker"
-        android:layout_width="327dp"
-        android:layout_height="344dp"
-        android:calendarViewShown="true" />
-
-    <Spinner
-        android:id="@+id/eventTypeSpinner"
-        android:layout_width="match_parent"
-        android:layout_height="65dp"
-        android:hint="Tipo de Evento" />
-
-    <Button
-        android:id="@+id/addEventButton"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Adicionar Evento"/>
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+
+        <Spinner
+            android:id="@+id/idSpinner"
+            android:layout_width="0dp"
+            android:layout_height="65dp"
+            android:layout_weight="1"
+            android:layout_marginTop="10dp"
+            android:hint="Tipo de Evento" />
+
+        <ImageButton
+            android:id="@+id/mostrarCalendario"
+            android:layout_width="60dp"
+            android:layout_height="54dp"
+            android:layout_marginTop="10dp"
+            android:backgroundTint="#00FFFFFF"
+            android:contentDescription="Calendário"
+            android:baselineAligned="false"
+            android:src="@drawable/calendario" />
+    </LinearLayout>
+
+    <DatePicker
+        android:id="@+id/idCalendario"
+        android:layout_width="327dp"
+        android:layout_height="344dp"
+        android:calendarViewShown="true"
+        android:visibility="gone" />
+
+
 
     <ListView
-        android:id="@+id/eventListView"
+        android:id="@+id/idLista"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"/>
-
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="16dp"
+        />
 </LinearLayout>
