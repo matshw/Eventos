@@ -6,7 +6,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
     public class BancoDados extends SQLiteOpenHelper {
         public BancoDados(Context context) {
-            super(context, "db", null, 1);
+            super(context, "db", null, 2);
         }
 
         @Override
@@ -23,5 +23,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 
         @Override
         public void onUpgrade(SQLiteDatabase sqLiteDatabase, int oldVersion, int newVersion) {
+            if (oldVersion < 2) {
+                sqLiteDatabase.execSQL("ALTER TABLE evento ADD COLUMN horario varchar(40);");
+            }
         }
     }

@@ -44,10 +44,12 @@ public class ListaEventoAdapter extends BaseAdapter {
         TextView textNome = (TextView)v.findViewById(R.id.idNomeE);
         TextView textCategoria = (TextView) v.findViewById(R.id.idCategoriaE);
         TextView textData = (TextView) v.findViewById(R.id.idDataE);
+        TextView textHorario =(TextView) v.findViewById(R.id.idHorarioE);
 
         textNome.setText(listaEvento.get(position).getNome());
         textCategoria.setText(listaEvento.get(position).getTipo());
         textData.setText(listaEvento.get(position).getData());
+        textHorario.setText(listaEvento.get(position).getRelogio());
         v.setTag(listaEvento.get(position).getId());
         return v;
     }

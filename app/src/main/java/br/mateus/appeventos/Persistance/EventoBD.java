@@ -22,6 +22,7 @@ public class EventoBD implements EventoDAO{
         evento.put("nome",e.getNome());
         evento.put("tipo",e.getTipo());
         evento.put("data",e.getData());
+        evento.put("horario",e.getRelogio());
         bd.getWritableDatabase().insertOrThrow("evento",null,evento);
         bd.close();
     }
@@ -32,6 +33,7 @@ public class EventoBD implements EventoDAO{
         evento.put("nome",e.getNome());
         evento.put("tipo",e.getTipo());
         evento.put("data",e.getData());
+        evento.put("horario",e.getRelogio());
         bd.getWritableDatabase().update("evento",evento,"id=?",new String[]{String.valueOf(e.getId())});
         bd.close();
     }
@@ -45,7 +47,7 @@ public class EventoBD implements EventoDAO{
     @Override
     public List listar() {
         List eventos = new ArrayList();
-        String colunas[]={"id","nome","data","tipo"};
+        String colunas[]={"id","nome","data","tipo","horario"};
         Cursor cursor = bd.getReadableDatabase().query("evento",colunas,null,null,null,null,"nome");
 
         while(cursor.moveToNext()){
@@ -54,6 +56,8 @@ public class EventoBD implements EventoDAO{
             e.setNome(cursor.getString(1));
             e.setData(cursor.getString(2));
             e.setTipo(cursor.getString(3));
+            e.setRelogio(cursor.getString(4));
+
             eventos.add(e);
         }
         bd.close();

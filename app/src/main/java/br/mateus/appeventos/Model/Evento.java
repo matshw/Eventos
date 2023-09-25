@@ -5,11 +5,22 @@ public class Evento {
     private String nome;
     private String data;
     private String tipo;
+    private String relogio;
+    public String getRelogio() {
+        return relogio;
+    }
 
-    public Evento(String nome, String data, String tipo) {
+    public void setRelogio(String relogio) {
+        this.relogio = relogio;
+    }
+
+
+
+    public Evento(String nome, String data, String tipo, String relogio) {
         this.nome = nome;
         this.data = data;
         this.tipo = tipo;
+        this.relogio = relogio;
     }
 
     public Evento() {
@@ -48,6 +59,6 @@ public class Evento {
         this.tipo = tipo;
     }
     public String toString(){
-        return tipo + " " + nome + " " + data;
+        return tipo + " " + nome + " " + data + " " + relogio;
     }
 }

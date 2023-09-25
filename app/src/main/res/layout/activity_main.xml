@@ -32,12 +32,20 @@
 
         <Spinner
             android:id="@+id/idSpinner"
-            android:layout_width="0dp"
+            android:layout_width="132dp"
             android:layout_height="65dp"
-            android:layout_weight="1"
             android:layout_marginTop="10dp"
+            android:layout_weight="1"
             android:hint="Tipo de Evento" />
-
+        <ImageButton
+            android:id="@+id/mostrarRelogio"
+            android:layout_width="60dp"
+            android:layout_height="54dp"
+            android:layout_marginTop="10dp"
+            android:backgroundTint="#00FFFFFF"
+            android:contentDescription="Relógio"
+            android:baselineAligned="false"
+            android:src="@drawable/relogio" />
         <ImageButton
             android:id="@+id/mostrarCalendario"
             android:layout_width="60dp"
@@ -56,7 +64,13 @@
         android:calendarViewShown="true"
         android:visibility="gone" />
 
-
+    <TimePicker
+        android:id="@+id/idRelogio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10dp"
+        android:visibility="gone" />
 
     <ListView
         android:id="@+id/idLista"
