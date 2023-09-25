@@ -4,7 +4,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -18,7 +17,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.mateus.appeventos.Model.Evento;
-import br.mateus.appeventos.Persistance.DBEvento;
+import br.mateus.appeventos.Model.ListaEventoAdapter;
+import br.mateus.appeventos.Persistance.BancoDados;
+import br.mateus.appeventos.Persistance.EventoBD;
+import br.mateus.appeventos.Persistance.EventoDAO;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -28,32 +30,32 @@ public class MainActivity extends AppCompatActivity {
     private ImageButton botaoSalvar;
     private ImageButton mostrarCalendario;
     private ListView lista;
-    private List<String> listaEventos;
-    private ArrayAdapter<String> eventoAdapter;
+    private List<Evento> listaEventos;
+    private Evento e;
+    private EventoDAO dao;
+    private ListaEventoAdapter arrayEvento;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        mapearXML();
+        verificar();
+        click();
+        arrayEvento = new ListaEventoAdapter(getApplicationContext(),listaEventos);
+        lista.setAdapter(arrayEvento);
 
-        nome = findViewById(R.id.idNome);
-        calendario = findViewById(R.id.idCalendario);
-        spinner = findViewById(R.id.idSpinner);
-        botaoSalvar = findViewById(R.id.idSalvar);
-        lista = findViewById(R.id.idLista);
-        mostrarCalendario = findViewById(R.id.mostrarCalendario);
-        spinner.setAdapter(ArrayAdapter.createFromResource(this, R.array.categorias, android.R.layout.simple_spinner_item));
-        listaEventos = new ArrayList<>();
-        eventoAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, listaEventos);
-        lista.setAdapter(eventoAdapter);
 
+    }
+
+    private void click(){
         mostrarCalendario.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (calendario.getVisibility() == View.VISIBLE) {
-                    calendario.setVisibility(View.GONE); // Torna o DatePicker invisível
+                    calendario.setVisibility(View.GONE);
                 } else {
-                    calendario.setVisibility(View.VISIBLE); // Torna o DatePicker visível
+                    calendario.setVisibility(View.VISIBLE);
                 }
             }
         });
@@ -71,31 +73,41 @@ public class MainActivity extends AppCompatActivity {
                     AlertDialog dialog = builder.create();
                     dialog.show();
                 } else {
-                    Evento evento = new Evento(nomeEvento, dataEvento, tipoEvento);
-
-                    DBEvento dbHelper = new DBEvento(MainActivity.this);
-                    SQLiteDatabase db = dbHelper.getWritableDatabase();
-
-                    ContentValues values = new ContentValues();
-                    values.put("nome", evento.getNome());
-                    values.put("data", evento.getData());
-                    values.put("tipo", evento.getTipo());
-
-                    long newRowId = db.insert("evento", null, values);
-                    evento.setId((int) newRowId); // Define o ID do evento após a inserção
-
-                    listaEventos.add(evento.getNome());
-                    listaEventos.add(evento.getData());
-                    listaEventos.add(evento.getTipo());
-                    eventoAdapter.notifyDataSetChanged();
-
-                    // Limpa os campos após adicionar o evento
-                    nome.getText().clear();
-
-                    db.close();
+                    if(e == null){
+                        e = new Evento();
+                    }
+                    e.setNome(nomeEvento);
+                    e.setTipo(tipoEvento);
+                    e.setData(dataEvento);
+                    if (e.getId() == null) {
+                        dao.salvar(e);
+                    } else{
+                        dao.editar(e);
+                    }
+                    atualizarItens();
                 }
             }
         });
+    }
+    private void mapearXML(){
+        nome = findViewById(R.id.idNome);
+        calendario = findViewById(R.id.idCalendario);
+        spinner = findViewById(R.id.idSpinner);
+        botaoSalvar = findViewById(R.id.idSalvar);
+        lista = findViewById(R.id.idLista);
+        mostrarCalendario = findViewById(R.id.mostrarCalendario);
+        spinner.setAdapter(ArrayAdapter.createFromResource(this, R.array.categorias, android.R.layout.simple_spinner_item));
 
+    }
+    private void verificar() {
+        if (dao == null) {
+            dao = new EventoBD(this);
+        }
+        listaEventos = dao.listar();
+    }
+    private void atualizarItens() {
+        listaEventos.clear();
+        listaEventos.addAll(dao.listar());
+        arrayEvento.notifyDataSetChanged();
     }
 }

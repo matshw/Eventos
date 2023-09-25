@@ -4,8 +4,8 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-    public class DBEvento extends SQLiteOpenHelper {
-        public DBEvento(Context context) {
+    public class BancoDados extends SQLiteOpenHelper {
+        public BancoDados(Context context) {
             super(context, "db", null, 1);
         }
 

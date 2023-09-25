@@ -1,7 +1,7 @@
 package br.mateus.appeventos.Model;
 
 public class Evento {
-    private int id; // ID único do evento
+    private Integer id; // ID único do evento
     private String nome;
     private String data;
     private String tipo;
@@ -12,7 +12,11 @@ public class Evento {
         this.tipo = tipo;
     }
 
-    public int getId() {
+    public Evento() {
+
+    }
+
+    public Integer getId() {
         return id;
     }
 
@@ -42,5 +46,8 @@ public class Evento {
 
     public void setTipo(String tipo) {
         this.tipo = tipo;
+    }
+    public String toString(){
+        return tipo + " " + nome + " " + data;
     }
 }
